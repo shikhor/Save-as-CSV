@@ -5,67 +5,55 @@ import java.util.List;
 
 public class Main {
 
+    static final String TABLE_NAME = "DosData";
+
     public static void main(String[] args) throws IOException {
 
-        List<HashMap<String, String>> stringListHashMap = new ArrayList<>();
+        List<String> columnNames[] = new ArrayList[2];
+        columnNames[0] = new ArrayList<>();
+        columnNames[1] = new ArrayList<>();
 
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("DATE", "31-May-17");
-        hashMap.put("FI_ID", "31");
-        hashMap.put("PRODUCT_TYPE_ID", "11110000");
-        hashMap.put("AMOUNT_BDT", "0");
-        hashMap.put("REPORTING_AREA", "1000");
-        hashMap.put("31", "GOVERNMENT");
-        hashMap.put("310158", "");
-        stringListHashMap.add(hashMap);
-        stringListHashMap.add(hashMap);
-        stringListHashMap.add(hashMap);
-        stringListHashMap.add(hashMap);
-        stringListHashMap.add(hashMap);
+        columnNames[0].add("BILLING");
+        columnNames[0].add("ORDER");
+        columnNames[0].add("PRODUCT");
+        columnNames[0].add("TOTAL");
+        columnNames[0].add("");
+        columnNames[0].add("31");
+        columnNames[0].add("310158");
 
-//        //DATE:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("31-May-17");
-//        System.out.println("List SZ: " + value.size());
-//        stringListHashMap.put("DATE", value);
-//        value.clear();
+        columnNames[1].add("DATE");
+        columnNames[1].add("FI_ID");
+        columnNames[1].add("PRODUCT_TYPE_ID");
+        columnNames[1].add("AMOUNT_BDT");
+        columnNames[1].add("REPORTING_AREA");
+        columnNames[1].add("31");
+        columnNames[1].add("310158");
 
-//        //FI_ID:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("31");
-//        stringListHashMap.put("FI_ID", value);
-//        value.clear();
-//
-//        //PRODUCT_TYPE_ID:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("11110000");
-//        stringListHashMap.put("PRODUCT_TYPE_ID", value);
-//        value.clear();
-//
-//        //AMOUNT_BDT:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("0");
-//        stringListHashMap.put("AMOUNT_BDT", value);
-//        value.clear();
-//
-//        //REPORTING_AREA:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("1000");
-//        stringListHashMap.put("REPORTING_AREA", value);
-//        value.clear();
-//
-//        //31:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("GOVERNMENT");
-//        stringListHashMap.put("31", value);
-//        value.clear();
-//
-//        //310158:
-//        for (int i = 0; i < 5; ++i)
-//            value.add("GOVERNMENT");
-//        stringListHashMap.put("310158", value);
-//        value.clear();
+        /*Table<        Rows<Columns<              >>> data-structure
+            ^^           ^^                             ^^                   */
+        HashMap<String, List<HashMap<String, String>>> table = new HashMap<>();
 
-        new CsvConverter().writeToCsv(stringListHashMap);
+        //Creating Column information:
+        HashMap<String, String> columnsInfo = new HashMap<>();
+        columnsInfo.put("DATE", "30-May-17");
+        columnsInfo.put("FI_ID", "31");
+        columnsInfo.put("PRODUCT_TYPE_ID", "11110000");
+        columnsInfo.put("AMOUNT_BDT", "0");
+        columnsInfo.put("REPORTING_AREA", "1000");
+        columnsInfo.put("31", "GOVERNMENT");
+        columnsInfo.put("310158", "");
+
+        //Creating Row information:
+        List<HashMap<String, String>> rowInfo = new ArrayList<>();
+
+        rowInfo.add(columnsInfo);
+        rowInfo.add(columnsInfo);
+        rowInfo.add(columnsInfo);
+        rowInfo.add(columnsInfo);
+        rowInfo.add(columnsInfo);
+
+        table.put(TABLE_NAME, rowInfo);
+
+        new CsvConverter().writeToCsv(columnNames, table);
     }
 }
